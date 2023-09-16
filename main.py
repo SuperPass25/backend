@@ -36,8 +36,9 @@ async def delete_password(password_id: int):
         deleted_password = db.pop(password_id)
         return deleted_password
     
-# This is not actually taking a length from parameters   
-@app.post("/generate-password/", response_model=dict)
-async def generate_password(length: int = 12):
+# This is not actually taking a length from parameters. This is probably a form that needs to be filled out by
+# the user and then sent here 
+@app.post("/generate-password/{length}", response_model=dict)
+async def generate_password(length: int):
     password = generate_secure_password(length)
     return {"password": password}
